@@ -8,7 +8,8 @@ function Spinner ( ) {
         width={ 200 }
         src={ spinner }
         alt='Loading...'
-      />
+      /><br/>
+      <p className='text-center mx-auto text-xl'>Loading...</p>
     </div>
   );
 }
