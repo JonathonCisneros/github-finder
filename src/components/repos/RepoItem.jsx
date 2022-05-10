@@ -13,8 +13,8 @@ function RepoItem ( { repo } ) {
   } = repo;
 
   return (
-    <div className='mb-2 rounded-md card bg-gray-800 hover:bg-gray-900'>
-      <div className='card-body'>
+    <div className='mb-2 rounded-md card bg-gray-700 hover:bg-gray-900 transition ease-in-out'>
+      <div className='card-body p-4 md:p'>
         <h3 className='mb-2 text-xl font-semibold'>
           <a href={ html_url } target='_blank' rel='noreferrer'>
             <FaLink className='inline mr-1' /> { name }
@@ -22,16 +22,16 @@ function RepoItem ( { repo } ) {
         </h3>
         <p className='mb-3'>{ description }</p>
         <div>
-          <div className='mr-2 badge badge-info badge-lg'>
+          <div className='mr-2 badge badge-info badge-sm md:badge-lg'>
             <FaEye className='mr-2' /> { watchers_count  }
           </div>
-          <div className='mr-2 badge badge-success badge-lg'>
+          <div className='mr-2 badge badge-success badge-sm md:badge-lg'>
             <FaStar className='mr-2' /> { stargazers_count  }
           </div>
-          <div className='mr-2 badge badge-error badge-lg'>
+          <div className='mr-2 badge badge-error badge-sm md:badge-lg'>
             <FaInfo className='mr-2' /> { open_issues  }
           </div>
-          <div className='mr-2 badge badge-warning badge-lg'>
+          <div className='mr-2 badge badge-warning badge-sm md:badge-lg'>
             <FaUtensils className='mr-2' /> { forks  }
           </div>
         </div>

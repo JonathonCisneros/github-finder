@@ -7,15 +7,3 @@
 	border-radius: 0.4rem;
 	opacity: 0.45;
 }
-
-/* For theme toggle */
-:root {
-  --my-color: #fff;
-  /* or any other variables/style */
-}
-[data-theme='business'] {
-  --my-color: #000;
-}
-[data-theme='corporate'] {
-  --my-color: #ffabc8;
-}
