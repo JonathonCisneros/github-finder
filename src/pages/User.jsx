@@ -2,15 +2,17 @@ import { FaCodepen, FaStore, FaUserFriends, FaUsers } from 'react-icons/fa';
 import { useEffect, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Spinner from '../components/layout/Spinner';
+import RepoList from '../components/repos/RepoList';
 import GithubContext from '../context/github/GithubContext';
 
 function User ( ) {
-  const { getUser, user, loading } = useContext( GithubContext );
+  const { getUser, user, loading, getUserRepos, repos } = useContext( GithubContext );
 
   const params = useParams( );
 
   useEffect( ( ) => {
     getUser( params.login );
+    getUserRepos( params.login );
   }, [ ] );
 
   const {
@@ -62,7 +64,7 @@ function User ( ) {
             <div className='mb-6'>
               <h1 className='text-xl card-title'>
                 { name }
-                <div class='badge badge-success mr-1 ml-2'>{ type }</div>
+                <div className='badge badge-success mr-1 ml-2'>{ type }</div>
               </h1>
               <p className='mt-4'>{ bio }</p>
               <div className='mt-4 card-actions'>
@@ -101,7 +103,7 @@ function User ( ) {
           <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4'>
             <div className='stat'>
               <div className='stat-figure text-secondary'>
-                <FaUsers class='text-3xl md:text-5xl' />
+                <FaUsers className='text-3xl md:text-5xl' />
               </div>
               <div className='stat-title pr-5'>
                 Followers
@@ -113,7 +115,7 @@ function User ( ) {
 
             <div className='stat'>
               <div className='stat-figure text-secondary'>
-                <FaUserFriends class='text-3xl md:text-5xl' />
+                <FaUserFriends className='text-3xl md:text-5xl' />
               </div>
               <div className='stat-title pr-5'>
                 Following
@@ -125,7 +127,7 @@ function User ( ) {
 
             <div className='stat'>
               <div className='stat-figure text-secondary'>
-                <FaCodepen class='text-3xl md:text-5xl' />
+                <FaCodepen className='text-3xl md:text-5xl' />
               </div>
               <div className='stat-title pr-5'>
                 Public Repos
@@ -137,7 +139,7 @@ function User ( ) {
 
             <div className='stat'>
               <div className='stat-figure text-secondary'>
-                <FaStore class='text-3xl md:text-5xl' />
+                <FaStore className='text-3xl md:text-5xl' />
               </div>
               <div className='stat-title pr-5'>
                 Public Gists
@@ -148,6 +150,8 @@ function User ( ) {
             </div>
           </div>
         </div>
+
+        <RepoList repos={ repos } />
       </div>
     </>
   );

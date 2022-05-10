@@ -11,6 +11,7 @@ import githubReducer from './GithubReducer';
    const initialState = {
       users: [ ],
       user: { },
+      repos: [ ],
       loading: false,
    }
 
@@ -62,6 +63,31 @@ import githubReducer from './GithubReducer';
      }
    }
 
+   // Get user repos
+   const getUserRepos = async ( login ) => {
+      setLoading( );
+
+      // Sort repos by created and only display 10 repos
+      const params = new URLSearchParams( {
+         sort: 'created',
+         per_page: 10,
+      } );
+
+      // Capture search results
+     const response = await fetch( `${GITHUB_URL }/users/${ login }/repos?${ params }`, {
+       headers: {
+         Authorization: `token: ${GITHUB_TOKEN }`,
+       },
+     } );
+
+     const data = await response.json( );
+
+     dispatch( {
+        type: 'GET_REPOS',
+        payload: data,
+     } );
+   }
+
    // Clear users when clear button is clicked
    const clearUsers = ( ) => dispatch( { type: 'CLEAR_USERS' } );
 
@@ -73,9 +99,11 @@ import githubReducer from './GithubReducer';
             users: state.users,
             user: state.user,
             loading: state.loading,
+            repos: state.repos,
             searchUsers,
             clearUsers,
             getUser,
+            getUserRepos,
          }}
       >
          { children }
