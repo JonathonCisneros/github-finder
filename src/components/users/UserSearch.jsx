@@ -29,14 +29,14 @@ function UserSearch ( ) {
             <div className='relative'>
               <input
                 type='text'
-                className='w-full pr-40 bg-neutral input input-lg text-primary'
+                className='w-full pr-40 bg-neutral input input-lg text-neutral-content'
                 placeholder='Search'
                 value={ text }
                 onChange={ handleChange }
               />
               <button
                 type='submit'
-                className='bg-base-100 absolute top-0 right-0 rounded-l-none w-36 btn btn-lg'>
+                className='bg-neutral-content text-primary absolute top-0 right-0 rounded-l-none w-36 btn btn-lg'>
                   Go
               </button>
             </div>

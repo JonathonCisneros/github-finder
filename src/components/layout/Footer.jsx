@@ -2,7 +2,7 @@ function Footer ( ) {
   const footerYear = new Date( ).getFullYear( ); // Automatically updates year for us
 
   return (
-    <footer className='footer p-10 text-primary footer-center'>
+    <footer className='footer p-10 text-secondary footer-center'>
       <div>
         <svg
           width='50'

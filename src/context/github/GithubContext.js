@@ -10,12 +10,13 @@ import githubReducer from './GithubReducer';
  export const GithubProvider = ( { children } ) => {
    const initialState = {
       users: [ ],
+      user: { },
       loading: false,
    }
 
    const [ state, dispatch ] = useReducer( githubReducer, initialState );
 
-   // Get search results
+   // Get users via search
    const searchUsers = async ( text ) => {
       setLoading( );
 
@@ -38,6 +39,29 @@ import githubReducer from './GithubReducer';
      } );
    }
 
+   // Get a single user
+   const getUser = async ( login ) => {
+      setLoading( );
+
+      // Capture search results
+     const response = await fetch( `${GITHUB_URL }/users/${ login }`, {
+       headers: {
+         Authorization: `token: ${GITHUB_TOKEN }`,
+       },
+     } );
+
+     if ( response.status === 404 ) {
+        window.location = '/notfound';
+     } else {
+        const data = await response.json( );
+
+       dispatch({
+          type: 'GET_USER',
+          payload: data,
+       });
+     }
+   }
+
    // Clear users when clear button is clicked
    const clearUsers = ( ) => dispatch( { type: 'CLEAR_USERS' } );
 
@@ -45,12 +69,14 @@ import githubReducer from './GithubReducer';
    const setLoading = ( ) => dispatch( { type: 'SET_LOADING' } );
 
    return (
-      <GithubContext.Provider value={ {
+      <GithubContext.Provider value={{
             users: state.users,
+            user: state.user,
             loading: state.loading,
             searchUsers,
             clearUsers,
-         } }
+            getUser,
+         }}
       >
          { children }
       </GithubContext.Provider>
