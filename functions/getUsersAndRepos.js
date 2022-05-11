@@ -7,8 +7,8 @@ exports.handler = async function ( event ) {
 	// 	per_page: 10,
   // });
 
-  const [user, repos] = await Promise.all([
-    github.get(`/users/${ login }`),
+  const [ user, repos ] = await Promise.all([
+    github.get(`/users/${ login }`);
     // github.get(`/users/${ login }/repos?${ params }`),
   ]);
 
