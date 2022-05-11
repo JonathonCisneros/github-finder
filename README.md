@@ -23,7 +23,7 @@ npm install
 Run:
 
 ```bash
-npm run dev
+npm start
 ```
 
 This will run on ports :3000 & :5000
