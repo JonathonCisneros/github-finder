@@ -18,12 +18,6 @@ function About ( ) {
       <p className='text-lg text-gray-400'>
         Version <span className='text-secondary'>1.0.0</span>
       </p>
-      <p className='text-lg text-gray-400'>
-        Layout By:&nbsp;
-        <a className='text-secondary' href='https://twitter.com/hassibmoddasser'>
-          Hassib Moddasser
-        </a>
-      </p>
     </>
   )
 }
