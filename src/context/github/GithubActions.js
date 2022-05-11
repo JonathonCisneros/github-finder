@@ -13,6 +13,6 @@ export const searchUsers = async ( text ) => {
 export const getUserAndRepos = async ( login ) => {
 	const params = new URLSearchParams({ q: login });
 
-  const reponse = await axios.get(`/api/getUserAndRepos?${ params }`);
+  const response = await axios.get(`/api/getUserAndRepos?${ params }`);
   return response.data;
 }
