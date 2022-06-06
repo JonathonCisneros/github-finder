@@ -1,4 +1,4 @@
-function About ( ) {
+function About() {
   return (
     <>
       <h1 className='text-6xl mb-4'>Github Finder</h1>
@@ -11,15 +11,18 @@ function About ( ) {
         </a>{' '}
         Udemy course by
         <strong>
-          <a href='https://traversymedia.com'> Brad Traversy</a>
+          <a href='https://traversymedia.com' className='text-primary'>
+            {' '}
+            Brad Traversy
+          </a>
         </strong>
         .
       </p>
       <p className='text-lg text-gray-400'>
-        Version <span className='text-secondary'>1.0.0</span>
+        Version <span className='text-primary'>1.0.0</span>
       </p>
     </>
   )
 }
 
-export default About;
+export default About

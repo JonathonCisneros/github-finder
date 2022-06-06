@@ -1,23 +1,29 @@
-import { FaGithub } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { FaGithub } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
-function Navbar ( { title } ) {
+function Navbar({ title }) {
   return (
     <nav className='navbar shadow-lg bg-neutral text-neutral-content mb-4'>
       <div className='container mx-auto'>
         <div className='flex-non px-2 mx-2'>
-          <FaGithub className='inline pr-2 text-3xl'/>
+          <FaGithub className='inline pr-2 text-3xl' />
           <Link to='/' className='text-lg font-bold align-middle'>
-            { title }
+            {title}
           </Link>
         </div>
         <div className='flex-1 px-2 mx-2'>
           <div className='flex justify-end'>
-            <Link to='/' className='btn btn-ghost btn-sm rounded-btn'>
+            <Link
+              to='/'
+              className='btn btn-ghost btn-sm rounded-btn hover:text-primary'
+            >
               Home
             </Link>
-            <Link to='/about' className='btn btn-ghost btn-sm rounded-btn'>
+            <Link
+              to='/about'
+              className='btn btn-ghost btn-sm rounded-btn hover:text-primary'
+            >
               About
             </Link>
           </div>
@@ -35,4 +41,4 @@ Navbar.propTypes = {
   title: PropTypes.string,
 }
 
-export default Navbar;
+export default Navbar
