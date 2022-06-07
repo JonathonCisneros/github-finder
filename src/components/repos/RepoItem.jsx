@@ -13,13 +13,11 @@ function RepoItem({ repo }) {
   } = repo
 
   return (
-    <a href={html_url} target='_blank' rel='noreferrer'>
-      <div className='mb-2 rounded-md card bg-base-200 hover:bg-primary hover:text-base-100 hover:cursor-pointer transition ease-in-out'>
+    <a href={html_url} target='_blank' rel='noreferrer' className='m-2'>
+      <div className='h-full rounded-md card bg-base-200 hover:bg-primary hover:text-base-100 hover:cursor-pointer transition ease-in-out'>
         <div className='card-body p-4 md:p'>
           <h3 className='mb-2 text-xl font-semibold'>
-            {/* <a href={html_url} target='_blank' rel='noreferrer'> */}
             <FaLink className='inline mr-1' /> {name}
-            {/* </a> */}
           </h3>
           <p className='mb-3'>{description}</p>
           <div>

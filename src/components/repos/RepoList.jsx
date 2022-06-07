@@ -8,9 +8,13 @@ function RepoList({ repos }) {
         <h2 className='text-3xl font-bold card-title my-4'>
           Latest Repositories
         </h2>
-        {repos.map((repo) => (
-          <RepoItem key={repo.id} repo={repo} />
-        ))}
+        <div>
+          <div className='grid grid-cols-1 lg:grid-cols-2'>
+            {repos.map((repo) => (
+              <RepoItem key={repo.id} repo={repo} />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   )

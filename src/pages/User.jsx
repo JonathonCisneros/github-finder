@@ -80,7 +80,7 @@ function User() {
                   href={html_url}
                   target='_blank'
                   rel='noreferrer'
-                  className='btn btn-outline hover:btn-secondary hover:text-base-100'
+                  className='btn btn-outline hover:btn-primary hover:shadow-lg'
                 >
                   Visit Github Profile
                 </a>
