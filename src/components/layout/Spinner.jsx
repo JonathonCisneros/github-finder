@@ -1,16 +1,16 @@
-import spinner from './assets/spinner.gif'
+import './css/spinner.css'
 
 function Spinner() {
   return (
-    <div className='w-100 mt-200'>
-      <img
-        className='text-align mx-auto'
-        width={400}
-        src={spinner}
-        alt='Loading...'
-      />
-      <br />
-      <p className='text-center mx-auto text-xl'>Loading...</p>
+    <div class='loader'>
+      <div class='duo duo1'>
+        <div class='dot dot-a bg-primary'></div>
+        <div class='dot dot-b bg-primary'></div>
+      </div>
+      <div class='duo duo2'>
+        <div class='dot dot-a bg-primary'></div>
+        <div class='dot dot-b bg-primary'></div>
+      </div>
     </div>
   )
 }

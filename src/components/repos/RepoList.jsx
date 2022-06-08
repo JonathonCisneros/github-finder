@@ -4,8 +4,8 @@ import RepoItem from './RepoItem'
 function RepoList({ repos }) {
   return (
     <div className='rounded-lg shadow-lg card bg-neutral-400'>
-      <div className='card-body'>
-        <h2 className='text-3xl font-bold card-title my-4'>
+      <div className='card-body p-2 md:p-6'>
+        <h2 className='text-3xl font-bold card-title my-4 grid lg:flex'>
           Latest Repositories
         </h2>
         <div>

@@ -47,14 +47,14 @@ function User() {
   return (
     <>
       <div className='w-full mx-auto lg:w-10/12'>
-        <div className='mb-4'>
+        <div className=''>
           <Link to='/' className='btn btn-ghost hover:btn-primary mb-5'>
             Back To Search
           </Link>
         </div>
 
         <div className='grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 mb-8 md:gap-8'>
-          <div className='custom-card-image mb-6 md:mb-0'>
+          <div className='custom-card-image mb-6 md:mb-0 px-8 md:px-0'>
             <div className='card rounded-lg shadow-xl image-full'>
               <figure>
                 <img src={avatar_url} alt='Github Avatar' />
@@ -88,36 +88,38 @@ function User() {
             </div>
 
             <div className='w-full rounded-lg shadow-md bg-base-100 stats'>
-              {location && (
-                <div className='stat'>
-                  <div className='stat-title text-sm'>Location</div>
-                  <div className='stat-value text-base'>{location}</div>
-                </div>
-              )}
-              {blog && (
-                <div className='stat'>
-                  <div className='stat-title text-sm'>Website</div>
-                  <div className='stat-value text-base'>
-                    <a href={websiteURL} target='_blank' rel='noreferrer'>
-                      {blog}
-                    </a>
+              <div className='grid grid-cols-1 md:stats'>
+                {location && (
+                  <div className='stat'>
+                    <div className='stat-title text-sm'>Location</div>
+                    <div className='stat-value text-base'>{location}</div>
                   </div>
-                </div>
-              )}
-              {twitter_username && (
-                <div className='stat'>
-                  <div className='stat-title text-sm'>Twitter</div>
-                  <div className='stat-value text-base'>
-                    <a
-                      href={`https://twitter.com/${twitter_username}`}
-                      target='_blank'
-                      rel='noreferrer'
-                    >
-                      {twitter_username}
-                    </a>
+                )}
+                {blog && (
+                  <div className='stat'>
+                    <div className='stat-title text-sm'>Website</div>
+                    <div className='stat-value text-base'>
+                      <a href={websiteURL} target='_blank' rel='noreferrer'>
+                        {blog}
+                      </a>
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
+                {twitter_username && (
+                  <div className='stat'>
+                    <div className='stat-title text-sm'>Twitter</div>
+                    <div className='stat-value text-base'>
+                      <a
+                        href={`https://twitter.com/${twitter_username}`}
+                        target='_blank'
+                        rel='noreferrer'
+                      >
+                        {twitter_username}
+                      </a>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

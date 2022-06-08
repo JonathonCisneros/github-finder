@@ -11,15 +11,30 @@ function About() {
         </a>{' '}
         Udemy course by
         <strong>
-          <a href='https://traversymedia.com' className='text-primary'>
+          <a
+            href='https://traversymedia.com'
+            className='text-primary'
+            target='_blank'
+          >
             {' '}
             Brad Traversy
+          </a>
+        </strong>{' '}
+        and has been customized by{' '}
+        <strong>
+          <a
+            href='https://github.com/JonathonCisneros'
+            className='text-primary'
+            target='_blank'
+          >
+            {' '}
+            Jonathon Cisneros
           </a>
         </strong>
         .
       </p>
       <p className='text-lg text-gray-400'>
-        Version <span className='text-primary'>1.0.0</span>
+        Version <span className='text-primary'>1.1.0</span>
       </p>
     </>
   )

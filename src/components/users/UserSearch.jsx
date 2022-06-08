@@ -25,7 +25,7 @@ function UserSearch() {
   }
 
   return (
-    <div className='grid grid-cols-1 xl:grid-cols-2 lg:grid-cols-2 mb-8 gap-8'>
+    <div className='grid grid-cols-1 xl:grid-cols-2 lg:grid-cols-2 mb-2 lg:mb-4 gap-2 lg:gap-7'>
       <div>
         <form onSubmit={handleSubmit}>
           <div className='form-control caret-primary rounded-input'>
