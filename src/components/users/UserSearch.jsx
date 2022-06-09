@@ -19,6 +19,9 @@ function UserSearch() {
     } else {
       dispatch({ type: 'SET_LOADING' })
       const users = await searchUsers(text)
+      if (users.length === 0) {
+        setAlert('No users found', 'error')
+      }
       dispatch({ type: 'GET_USERS', payload: users })
       setText('')
     }

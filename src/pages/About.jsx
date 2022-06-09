@@ -15,6 +15,7 @@ function About() {
             href='https://traversymedia.com'
             className='text-primary'
             target='_blank'
+            rel='noreferrer'
           >
             {' '}
             Brad Traversy
@@ -26,6 +27,7 @@ function About() {
             href='https://github.com/JonathonCisneros'
             className='text-primary'
             target='_blank'
+            rel='noreferrer'
           >
             {' '}
             Jonathon Cisneros

@@ -37,6 +37,8 @@ function User() {
     public_gists,
   } = user
 
+  console.log(repos)
+
   // NOTE: check for valid url to users website
   const websiteURL = blog?.startsWith('http') ? blog : 'https://' + blog
 
