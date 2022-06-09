@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getUserAndRepos } from '../../context/github/GithubActions'
-import { FaUserFriends, FaUsers } from 'react-icons/fa'
 import PropTypes from 'prop-types'
 
 function UserItem({ user }) {
@@ -10,9 +9,9 @@ function UserItem({ user }) {
   const [name, setName] = useState('')
   const [location, setLocation] = useState('')
 
+  // Get user's name and location
   const getUserData = async () => {
     const userData = await getUserAndRepos(login)
-    console.log(userData.user)
 
     setName(userData.user.name)
     setLocation(userData.user.location)
@@ -30,6 +29,8 @@ function UserItem({ user }) {
             </div>
           </div>
         </div>
+
+        {/* Display location and name or login */}
         <div>
           <h2 className='card-title'>{name || login}</h2>
           <p className='text-primary mb-2'>
