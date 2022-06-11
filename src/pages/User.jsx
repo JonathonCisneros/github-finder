@@ -7,10 +7,12 @@ import GithubContext from '../context/github/GithubContext'
 import { getUserAndRepos } from '../context/github/GithubActions'
 
 function User() {
+  // Get user, repos, loading and dispatch from Github context
   const { user, loading, repos, dispatch } = useContext(GithubContext)
 
   const params = useParams()
 
+  //** Get user and repo data **//
   useEffect(() => {
     dispatch({ type: 'SET_LOADING' })
     const getUserData = async () => {
@@ -36,8 +38,6 @@ function User() {
     public_repos,
     public_gists,
   } = user
-
-  console.log(repos)
 
   // NOTE: check for valid url to users website
   const websiteURL = blog?.startsWith('http') ? blog : 'https://' + blog
@@ -170,7 +170,7 @@ function User() {
           </div>
         </div>
 
-        <RepoList repos={repos} />
+        <RepoList user={user} repos={repos} />
       </div>
     </>
   )

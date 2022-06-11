@@ -15,3 +15,11 @@ export const getUserAndRepos = async (login) => {
   const response = await axios.get(`/api/getUserAndRepos?${params}`)
   return response.data
 }
+
+/***** Get repo commits data *****/
+export const getBranchesAndCommits = async (login, repo) => {
+  const params = new URLSearchParams({ login, repo })
+
+  const response = await axios.get(`/api/getBranchesAndCommits?${params}`)
+  return response.data
+}

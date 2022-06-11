@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import RepoItem from './RepoItem'
 
-function RepoList({ repos }) {
+function RepoList({ user, repos }) {
   return (
     <div className='rounded-lg shadow-lg card bg-neutral-400'>
       <div className='card-body p-2 md:p-6'>
@@ -11,7 +11,7 @@ function RepoList({ repos }) {
         <div>
           <div className='grid grid-cols-1 lg:grid-cols-2'>
             {repos.map((repo) => (
-              <RepoItem key={repo.id} repo={repo} />
+              <RepoItem key={repo.id} user={user} repo={repo} />
             ))}
           </div>
         </div>
