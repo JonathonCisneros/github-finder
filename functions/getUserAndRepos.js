@@ -4,7 +4,7 @@ exports.handler = async function (event) {
   console.log(event)
   const login = event.queryStringParameters.q
   const params = new URLSearchParams({
-    sort: 'created',
+    sort: 'updated',
     per_page: 10,
   })
 

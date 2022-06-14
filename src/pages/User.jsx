@@ -134,7 +134,9 @@ function User() {
               </div>
               <div className='stat-title pr-5'>Followers</div>
               <div className='stat-value pr-5 text-3xl md:text-4xl'>
-                {followers}
+                {!followers
+                  ? 0
+                  : followers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
               </div>
             </div>
 
@@ -144,7 +146,9 @@ function User() {
               </div>
               <div className='stat-title pr-5'>Following</div>
               <div className='stat-value pr-5 text-3xl md:text-4xl'>
-                {following}
+                {!following
+                  ? 0
+                  : following.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
               </div>
             </div>
 

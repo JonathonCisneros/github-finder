@@ -84,9 +84,14 @@ function RepoItem({ user, repo }) {
               </div>
             </div>
             <div className='grid grid-cols-2'>
-              <GoGitCommit className='text-xl text-primary group-hover:text-base-100' />
+              <GoGitCommit className='text-xl text-primary group-hover:text-base-100 mt-[2px]' />
               <div className='text-md ml-[-3rem] md:ml-[-3.5rem] xl:ml-[-5rem]'>
-                {commits.length} {commits.length === 1 ? ' commit' : ' commits'}
+                {commits.length}
+                {commits.length === 1
+                  ? ' commit'
+                  : commits.length === 30
+                  ? '+ commits'
+                  : ' commits'}
               </div>
             </div>
           </div>
@@ -130,16 +135,22 @@ function RepoItem({ user, repo }) {
           </p>
           <div>
             <div className='mr-2 badge badge-secondary badge-sm md:badge-lg'>
-              <FaEye className='mr-2' /> {watchers_count}
+              <FaEye className='mr-2' />{' '}
+              {watchers_count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
             </div>
             <div className='mr-2 badge badge-success badge-sm md:badge-lg'>
-              <FaStar className='mr-2' /> {stargazers_count}
+              <FaStar className='mr-2' />{' '}
+              {stargazers_count
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
             </div>
             <div className='mr-2 badge badge-error badge-sm md:badge-lg'>
-              <FaInfo className='mr-2' /> {open_issues}
+              <FaInfo className='mr-2' />{' '}
+              {open_issues.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
             </div>
             <div className='mr-2 badge badge-warning badge-sm md:badge-lg'>
-              <FaUtensils className='mr-2' /> {forks}
+              <FaUtensils className='mr-2' />{' '}
+              {forks.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
             </div>
           </div>
         </div>
