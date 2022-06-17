@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { FaEye, FaInfo, FaLink, FaStar, FaUtensils } from 'react-icons/fa'
 import { GiTreeBranch } from 'react-icons/gi'
-import { GoGitCommit } from 'react-icons/go'
+import { GoGitCommit, GoFileDirectory } from 'react-icons/go'
 import { getBranchesAndCommits } from '../../context/github/GithubActions'
 import PropTypes from 'prop-types'
 
@@ -13,8 +13,10 @@ function RepoItem({ user, repo }) {
   const [latestCommitDate, setLatestCommitDate] = useState('')
 
   const {
+    id,
     name,
     description,
+    default_branch,
     html_url,
     forks,
     open_issues,
@@ -23,12 +25,14 @@ function RepoItem({ user, repo }) {
     size,
   } = repo
 
+  const { login } = user
+
   /** Get repo branches and commits **/
   useEffect(() => {
     const getCommits = async () => {
       // Check repo data, without this it will crash the app when there is an empty repo
       if (size > 0) {
-        const repoData = await getBranchesAndCommits(user.login, name)
+        const repoData = await getBranchesAndCommits(login, name)
         // Only set state if there are any commits
         if (repoData.commits.length > 0) {
           setBranches(repoData.branches)
@@ -52,7 +56,7 @@ function RepoItem({ user, repo }) {
     }
 
     getCommits()
-  }, [user.login, name])
+  }, [login, name, size])
 
   const todaysDate = new Date()
   const newCommitDate = new Date(latestCommitDate) // Format latest commit date from string to date object
@@ -69,22 +73,22 @@ function RepoItem({ user, repo }) {
   const daysSinceLastCommit = Math.ceil(timeDifference / (1000 * 60 * 60 * 24)) // Format time to days
 
   return (
-    <a href={html_url} target='_blank' rel='noreferrer' className='m-2'>
-      <div className='h-full rounded-md card bg-base-200 hover:bg-primary hover:text-base-100 hover:cursor-pointer transition ease-in-out group'>
+    <div className='m-2'>
+      <div className='h-full rounded-md card bg-base-200 transition ease-in-out group'>
         <div className='card-body p-4'>
-          <h3 className='mb-2 text-xl font-semibold'>
-            <FaLink className='inline mr-1' /> {name}
+          <h3 className='mb-2 text-xl font-semibold break-all'>
+            <GoFileDirectory className='inline mr-1 mb-1' /> {name}
           </h3>
           <div className='grid grid-cols-2'>
             <div className='grid grid-cols-2'>
-              <GiTreeBranch className='text-xl text-primary group-hover:text-base-100' />
+              <GiTreeBranch className='text-xl text-primary animate-wiggle' />
               <div className='text-md ml-[-3rem] md:ml-[-3.5rem] xl:ml-[-5rem]'>
                 {branches.length}{' '}
                 {branches.length === 1 ? ' branch' : ' branches'}
               </div>
             </div>
             <div className='grid grid-cols-2'>
-              <GoGitCommit className='text-xl text-primary group-hover:text-base-100 mt-[2px]' />
+              <GoGitCommit className='text-xl text-primary mt-[2px]' />
               <div className='text-md ml-[-3rem] md:ml-[-3.5rem] xl:ml-[-5rem]'>
                 {commits.length}
                 {commits.length === 1
@@ -96,17 +100,17 @@ function RepoItem({ user, repo }) {
             </div>
           </div>
 
-          <hr className='border-gray-400 group-hover:border-base-100' />
+          <hr className='border-gray-400' />
 
           {/* Display latest commit */}
           {commits.length > 0 ? (
-            <p className='text-sm text-gray-500 group-hover:text-base-100'>
+            <p className='text-sm text-gray-500'>
               <span className='font-bold'>
                 {latestCommitAuthor !== '' ? latestCommitAuthor : 'Anonymous'}
               </span>{' '}
-              {latestCommitMessage}{' '}
+              <span className='break-all'>{latestCommitMessage} </span>
               {/* Display time depending on how long since last commit */}
-              <span className='text-gray-400 group-hover:text-base-100'>
+              <span className='text-gray-400'>
                 {secondsSinceLastCommit <= 60
                   ? secondsSinceLastCommit +
                     (secondsSinceLastCommit === 1 ? ' second' : ' seconds')
@@ -129,11 +133,48 @@ function RepoItem({ user, repo }) {
             <p className='text-gray-500'>No commits</p>
           )}
 
-          <div className='text-md font-bold'>Description</div>
-          <p className='mb-3'>
-            {description !== null ? description : 'No description'}
-          </p>
-          <div>
+          {/*  Display description if any */}
+          {description !== null ? (
+            <>
+              <h3 className='text-lg font-bold'>Description</h3>
+              <p className='text-md mb-2'>{description}</p>
+            </>
+          ) : (
+            <h3 className='text-lg mb-2'>No Description</h3>
+          )}
+
+          {/* Open Repo Modal button */}
+          <label
+            htmlFor={id}
+            className='btn btn-primary text-base-100 modal-button'
+          >
+            More Repo Info
+          </label>
+        </div>
+      </div>
+
+      {/* Repo Modal */}
+      <input type='checkbox' id={id} className='modal-toggle' />
+      <label htmlFor={id} className='modal transition-all'>
+        <label
+          htmlFor=''
+          className='modal-box relative max-w-3xl max-h-[60vh] md:max-h-[90vh]'
+        >
+          <label
+            htmlFor={id}
+            className='btn btn-sm btn-circle absolute right-3 top-3'
+          >
+            ✕
+          </label>
+
+          <h1 className='text-primary text-3xl lg:text-5xl font-bold card-title my-4 break-all'>
+            <a href={html_url} target='_blank' rel='noreferrer'>
+              <FaLink className='inline mr-1 ' /> {name}
+            </a>
+          </h1>
+
+          {/* Badges */}
+          <div className='mb-3 flex w-full'>
             <div className='mr-2 badge badge-secondary badge-sm md:badge-lg'>
               <FaEye className='mr-2' />{' '}
               {watchers_count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
@@ -153,9 +194,74 @@ function RepoItem({ user, repo }) {
               {forks.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
             </div>
           </div>
-        </div>
-      </div>
-    </a>
+
+          {/* Display branches */}
+          {branches.length > 0 ? (
+            <div className='collapse collapse-arrow border border-base-300 bg-base-100 rounded-box mb-3'>
+              <input type='checkbox' className='transition-all' />
+              <h3 className='text-xl font-bold collapse-title'>
+                {branches.length}
+                {branches.length === 1 ? ' Branch' : ' Branches'}
+              </h3>
+              <div className='collapse-content transition-all'>
+                {branches.map((branch) => (
+                  <p
+                    key={branch.commit.sha}
+                    className='text-md my-2 border-l-1'
+                  >
+                    <GiTreeBranch className='inline mr-1 mb-1 text-primary animate-wiggle' />
+                    <span className='font-bold'>{branch.name}</span>
+                  </p>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <h3 className='text-xl text-gray-500 mb-2'>No Branches</h3>
+          )}
+
+          {/* Display each commit (30 max) */}
+          {commits.length > 0 ? (
+            <div className='collapse collapse-arrow border border-base-300 bg-base-100 rounded-box'>
+              <input type='checkbox' />
+              <h3 className='text-xl font-bold collapse-title'>
+                {commits.length}
+                {commits.length === 1
+                  ? ' Commit '
+                  : commits.length === 30
+                  ? '+ Commits '
+                  : ' Commits '}
+                on <span className='text-primary'>{default_branch}</span> branch
+              </h3>
+              <div className='collapse-content transition-all'>
+                {commits.map((commit) => (
+                  <p key={commit.sha} className='text-md my-2 border-l-1'>
+                    <GoGitCommit className='inline mr-1 mb-1 text-primary rotate-90' />
+                    <span className='font-bold'>
+                      {commit.author !== null
+                        ? commit.author.login
+                        : commit.commit.author.name}
+                    </span>{' '}
+                    {commit.commit.message}{' '}
+                    <span className='text-gray-400'>
+                      {new Date(commit.commit.author.date).toLocaleDateString(
+                        'en-us',
+                        {
+                          month: 'short',
+                          day: 'numeric',
+                          year: 'numeric',
+                        }
+                      )}
+                    </span>
+                  </p>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <h3 className='text-xl text-gray-500 mb-2'>No Commits</h3>
+          )}
+        </label>
+      </label>
+    </div>
   )
 }
 

@@ -36,7 +36,7 @@ function About() {
         . Along with a new theme and slight theme asjustments, there are new
         features to look for. When searching for users, their location is listed
         on their card and their name is updated if that user has their full name
-        on Github. A new API function grabs information about each repository
+        on GitHub. A new API function grabs information about each repository
         and displays the latest commit, number of commits and number of
         branches.
       </p>
