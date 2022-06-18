@@ -1,5 +1,30 @@
 import { useEffect, useState } from 'react'
-import { FaEye, FaInfo, FaLink, FaStar, FaUtensils } from 'react-icons/fa'
+import {
+  DiCss3,
+  DiHtml5,
+  DiGo,
+  DiJava,
+  DiJsBadge,
+  DiPhp,
+  DiPython,
+  DiRuby,
+} from 'react-icons/di'
+import {
+  SiCoffeescript,
+  SiCplusplus,
+  SiCsharp,
+  SiKotlin,
+  SiSwift,
+  SiTypescript,
+} from 'react-icons/si'
+import {
+  FaEye,
+  FaInfo,
+  FaLink,
+  FaStar,
+  FaUtensils,
+  FaGithubAlt,
+} from 'react-icons/fa'
 import { GiTreeBranch } from 'react-icons/gi'
 import { GoGitCommit, GoFileDirectory } from 'react-icons/go'
 import { getBranchesAndCommits } from '../../context/github/GithubActions'
@@ -17,8 +42,10 @@ function RepoItem({ user, repo }) {
     name,
     description,
     default_branch,
+    homepage,
     html_url,
     forks,
+    language,
     open_issues,
     watchers_count,
     stargazers_count,
@@ -146,7 +173,7 @@ function RepoItem({ user, repo }) {
           {/* Open Repo Modal button */}
           <label
             htmlFor={id}
-            className='btn btn-primary text-base-100 modal-button'
+            className='btn btn-primary btn-outline text-base-100 modal-button '
           >
             More Repo Info
           </label>
@@ -167,31 +194,148 @@ function RepoItem({ user, repo }) {
             ✕
           </label>
 
-          <h1 className='text-primary text-3xl lg:text-5xl font-bold card-title my-4 break-all'>
-            <a href={html_url} target='_blank' rel='noreferrer'>
-              <FaLink className='inline mr-1 ' /> {name}
-            </a>
-          </h1>
+          <div className='w-full flex'>
+            <h1 className='text-neutral text-3xl lg:text-5xl font-bold card-title my-4 break-all '>
+              <GoFileDirectory className='inline mb-1' /> {name}
+            </h1>
+          </div>
+
+          {/* Top language used */}
+          {language !== null && (
+            <>
+              <h2 className='text-md md:text-lg mb-3'>
+                <span className='font-bold'>{user.name || login} </span>heavily
+                favored{' '}
+                {language === 'CSS' ? (
+                  <>
+                    <DiCss3 className='inline mb-1 text-xl  text-[#563d7c]' />{' '}
+                    <span className='font-bold'> CSS</span>
+                  </>
+                ) : language === 'HTML' ? (
+                  <>
+                    <DiHtml5 className='inline mb-1 text-xl  text-[#e34c26]' />
+                    <span className='font-bold'> HTML</span>
+                  </>
+                ) : language === 'TypeScript' ? (
+                  <>
+                    <SiTypescript className='inline mb-1 text-xl  text-[#3178c6]' />
+                    <span className='font-bold'> TypeScript </span>
+                  </>
+                ) : language === 'JavaScript' ? (
+                  <>
+                    <DiJsBadge className='inline mb-1 text-xl  text-[#f1e05a]' />
+                    <span className='font-bold'> Javascript </span>
+                  </>
+                ) : language === 'Java' ? (
+                  <>
+                    <DiJava className='inline mb-1 text-xl text-[#b07219]' />
+                    <span className='font-bold'>
+                      {' '}
+                      Java (hey there, old timer){' '}
+                    </span>
+                  </>
+                ) : language === 'Python' ? (
+                  <>
+                    <DiPython className='inline mb-1 text-2xl  text-[#3572A5]' />
+                    <span className='font-bold'> Python </span>
+                  </>
+                ) : language === 'Swift' ? (
+                  <>
+                    <SiSwift className='inline mb-1 text-xl  text-[#F05138]' />
+                    <span className='font-bold'> Swift </span>
+                  </>
+                ) : language === 'PHP' ? (
+                  <>
+                    <DiPhp className='inline mb-1 text-3xl md:text-4xl  text-[#4F5D95]' />
+                    <span className='font-bold'>(eww, messy) </span>
+                  </>
+                ) : language === 'Ruby' ? (
+                  <>
+                    <DiRuby className='inline mb-1 text-xl  text-[#701516]' />
+                    <span className='font-bold'> Ruby </span>
+                  </>
+                ) : language === 'Go' ? (
+                  <>
+                    <DiGo className='inline mb-1 text-3xl text-[#00ADD8]' />
+                    <span className='font-bold'> Go </span>
+                  </>
+                ) : language === 'Kotlin' ? (
+                  <>
+                    <SiKotlin className='inline mb-1 text-lg text-[#A97BFF]' />
+                    <span className='font-bold'> Kotlin </span>
+                  </>
+                ) : language === 'CoffeeScript' ? (
+                  <>
+                    <SiCoffeescript className='inline mb-1 text-xl text-[#244776]' />
+                    <span className='font-bold'> CoffeeScript </span>
+                  </>
+                ) : language === 'C++' ? (
+                  <>
+                    <SiCplusplus className='inline mb-1 text-xl text-[#f34b7d]' />
+                    <span className='font-bold'> C++ </span>
+                  </>
+                ) : language === 'C#' ? (
+                  <>
+                    <SiCsharp className='inline mb-1 text-xl text-[#178600]' />
+                    <span className='font-bold'> C# </span>
+                  </>
+                ) : (
+                  <span className='font-bold'>{language}</span>
+                )}{' '}
+                in this project.
+              </h2>
+            </>
+          )}
+
+          {/* Links */}
+          <div className=' w-full mb-4'>
+            <div className='m-auto'>
+              <a
+                href={html_url}
+                className='btn btn-primary btn-outline  mb-3 w-full'
+                target='_blank'
+                rel='noreferrer'
+              >
+                <FaGithubAlt className='inline mr-1' />
+                View on GitHub
+              </a>
+              {homepage && (
+                <a
+                  href={homepage}
+                  className='btn btn-outline btn-primary w-full'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  <FaLink className='inline mr-1 ' />
+                  Live Demo
+                </a>
+              )}
+            </div>
+          </div>
 
           {/* Badges */}
-          <div className='mb-3 flex w-full'>
-            <div className='mr-2 badge badge-secondary badge-sm md:badge-lg'>
-              <FaEye className='mr-2' />{' '}
-              {watchers_count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-            </div>
-            <div className='mr-2 badge badge-success badge-sm md:badge-lg'>
-              <FaStar className='mr-2' />{' '}
-              {stargazers_count
-                .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-            </div>
-            <div className='mr-2 badge badge-error badge-sm md:badge-lg'>
-              <FaInfo className='mr-2' />{' '}
-              {open_issues.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-            </div>
-            <div className='mr-2 badge badge-warning badge-sm md:badge-lg'>
-              <FaUtensils className='mr-2' />{' '}
-              {forks.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+          <div className='flex w-full mb-3'>
+            <div className='m-auto'>
+              <div className='badge badge-secondary badge-sm md:badge-lg mr-2 lg:mr-3'>
+                <FaEye className='mr-2' />{' '}
+                {watchers_count
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+              </div>
+              <div className='badge badge-success badge-sm md:badge-lg mr-2 lg:mr-3'>
+                <FaStar className='mr-2' />{' '}
+                {stargazers_count
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+              </div>
+              <div className='badge badge-error badge-sm md:badge-lg mr-2 lg:mr-3'>
+                <FaInfo className='mr-2' />{' '}
+                {open_issues.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+              </div>
+              <div className='badge badge-warning badge-sm md:badge-lg mr-2 lg:mr-3'>
+                <FaUtensils className='mr-2' />{' '}
+                {forks.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+              </div>
             </div>
           </div>
 
@@ -235,7 +379,7 @@ function RepoItem({ user, repo }) {
               <div className='collapse-content transition-all'>
                 {commits.map((commit) => (
                   <p key={commit.sha} className='text-md my-2 border-l-1'>
-                    <GoGitCommit className='inline mr-1 mb-1 text-primary rotate-90' />
+                    <GoGitCommit className='inline mr-1 mb-1 text-primary rotate-90 animate-pulse' />
                     <span className='font-bold'>
                       {commit.author !== null
                         ? commit.author.login
