@@ -175,14 +175,14 @@ function RepoItem({ user, repo }) {
             htmlFor={id}
             className='btn btn-primary btn-outline text-base-100 modal-button '
           >
-            More Repo Info
+            More Info
           </label>
         </div>
       </div>
 
       {/* Repo Modal */}
       <input type='checkbox' id={id} className='modal-toggle' />
-      <label htmlFor={id} className='modal transition-all'>
+      <label htmlFor={id} className='modal'>
         <label
           htmlFor=''
           className='modal-box relative max-w-3xl max-h-[60vh] md:max-h-[90vh]'
@@ -200,12 +200,20 @@ function RepoItem({ user, repo }) {
             </h1>
           </div>
 
+          {/* Description */}
+          {description !== null && (
+            <>
+              <h2 className='text-2xl font-bold'>Description</h2>
+              <p className='text-md mb-2'>{description}</p>
+            </>
+          )}
+
           {/* Top language used */}
           {language !== null && (
             <>
-              <h2 className='text-md md:text-lg mb-3'>
-                <span className='font-bold'>{user.name || login} </span>heavily
-                favored{' '}
+              <h2 className='text-2xl font-bold'>Language</h2>
+              <h3 className='text-md md:text-lg mb-3'>
+                {user.name || login} heavily favored{' '}
                 {language === 'CSS' ? (
                   <>
                     <DiCss3 className='inline mb-1 text-xl  text-[#563d7c]' />{' '}
@@ -283,7 +291,7 @@ function RepoItem({ user, repo }) {
                   <span className='font-bold'>{language}</span>
                 )}{' '}
                 in this project.
-              </h2>
+              </h3>
             </>
           )}
 
@@ -341,8 +349,8 @@ function RepoItem({ user, repo }) {
 
           {/* Display branches */}
           {branches.length > 0 ? (
-            <div className='collapse collapse-arrow border border-base-300 bg-base-100 rounded-box mb-3'>
-              <input type='checkbox' className='transition-all' />
+            <div className='collapse collapse-arrow border border-base-300 bg-base-100 rounded-box mb-3 transition-all'>
+              <input type='checkbox' />
               <h3 className='text-xl font-bold collapse-title'>
                 {branches.length}
                 {branches.length === 1 ? ' Branch' : ' Branches'}
@@ -365,7 +373,7 @@ function RepoItem({ user, repo }) {
 
           {/* Display each commit (30 max) */}
           {commits.length > 0 ? (
-            <div className='collapse collapse-arrow border border-base-300 bg-base-100 rounded-box'>
+            <div className='collapse collapse-arrow border border-base-300 bg-base-100 rounded-box transition-all'>
               <input type='checkbox' />
               <h3 className='text-xl font-bold collapse-title'>
                 {commits.length}
