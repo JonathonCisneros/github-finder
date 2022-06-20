@@ -55,7 +55,7 @@ function User() {
           </Link>
         </div>
 
-        <div className='grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 mb-8 md:gap-8'>
+        <div className='grid grid-cols-1 md:grid-cols-3 mb-4 md:gap-8'>
           <div className='custom-card-image mb-6 md:mb-0 px-8 md:px-0'>
             <div className='card rounded-lg shadow-xl image-full'>
               <figure>
@@ -88,41 +88,41 @@ function User() {
                 </a>
               </div>
             </div>
+          </div>
+        </div>
 
-            <div className='w-full rounded-lg shadow-md bg-base-100 stats'>
-              <div className='grid grid-cols-1 md:stats'>
-                {location && (
-                  <div className='stat'>
-                    <div className='stat-title text-sm'>Location</div>
-                    <div className='stat-value text-base'>{location}</div>
-                  </div>
-                )}
-                {blog && (
-                  <div className='stat'>
-                    <div className='stat-title text-sm'>Website</div>
-                    <div className='stat-value text-base'>
-                      <a href={websiteURL} target='_blank' rel='noreferrer'>
-                        {blog}
-                      </a>
-                    </div>
-                  </div>
-                )}
-                {twitter_username && (
-                  <div className='stat'>
-                    <div className='stat-title text-sm'>Twitter</div>
-                    <div className='stat-value text-base'>
-                      <a
-                        href={`https://twitter.com/${twitter_username}`}
-                        target='_blank'
-                        rel='noreferrer'
-                      >
-                        {twitter_username}
-                      </a>
-                    </div>
-                  </div>
-                )}
+        <div className='w-full rounded-lg shadow-md bg-base-100 stats mb-6'>
+          <div className='grid md:stats'>
+            {location && (
+              <div className='stat'>
+                <div className='stat-title text-sm'>Location</div>
+                <div className='stat-value text-base'>{location}</div>
               </div>
-            </div>
+            )}
+            {blog && (
+              <div className='stat'>
+                <div className='stat-title text-sm'>Website</div>
+                <div className='stat-value text-base'>
+                  <a href={websiteURL} target='_blank' rel='noreferrer'>
+                    {blog}
+                  </a>
+                </div>
+              </div>
+            )}
+            {twitter_username && (
+              <div className='stat'>
+                <div className='stat-title text-sm'>Twitter</div>
+                <div className='stat-value text-base'>
+                  <a
+                    href={`https://twitter.com/${twitter_username}`}
+                    target='_blank'
+                    rel='noreferrer'
+                  >
+                    {twitter_username}
+                  </a>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -134,7 +134,9 @@ function User() {
               </div>
               <div className='stat-title pr-5'>Followers</div>
               <div className='stat-value pr-5 text-3xl md:text-4xl'>
-                {followers}
+                {!followers
+                  ? 0
+                  : followers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
               </div>
             </div>
 
@@ -144,7 +146,9 @@ function User() {
               </div>
               <div className='stat-title pr-5'>Following</div>
               <div className='stat-value pr-5 text-3xl md:text-4xl'>
-                {following}
+                {!following
+                  ? 0
+                  : following.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
               </div>
             </div>
 

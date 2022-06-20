@@ -7,3 +7,10 @@
 	border-radius: 0.4rem;
 	opacity: 0.45;
 }
+
+/* Tighten stats on mobile devices */
+@media screen and (max-width: 768px){
+	.stat {
+		padding-top: 0px
+	}
+}
